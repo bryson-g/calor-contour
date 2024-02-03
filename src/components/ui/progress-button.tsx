@@ -10,9 +10,9 @@ export default function ProgressButton({
   function handleClick() {}
 
   return (
-    <div className="w-[250px] h-[250px] border-8 border-blue-900 bg-blue-800 rounded-full drop-shadow-xl">
+    <div className="w-[230px] h-[230px] border-8 border-gray-900 bg-gray-800 rounded-full drop-shadow-xl">
       <button
-        className="border-4 border-white w-full h-full rounded-full bg-blue-600 duration-200 active:scale-90"
+        className="border-4 border-white w-full h-full rounded-full bg-gray-600 duration-200 active:scale-90"
         onClick={handleClick}
       >
         <div className="font-bold text-white">
