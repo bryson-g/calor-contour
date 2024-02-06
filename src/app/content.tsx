@@ -7,7 +7,7 @@ import ProgressButton from "../components/ui/progress-button";
 
 export default function Content() {
   return (
-    <div className="flex flex-col items-center gap-7 p-4">
+    <div className="flex flex-col items-center justify-around h-full">
       <Goal />
       <Eaten />
       <Planned />

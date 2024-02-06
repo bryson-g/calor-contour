@@ -2,6 +2,8 @@ import Content from "./content";
 
 export default function Home() {
   return (
-    <Content />
+    <div className="w-screen h-screen">
+      <Content />
+    </div>
   );
 }
