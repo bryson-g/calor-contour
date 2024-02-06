@@ -1,6 +1,5 @@
 import ProgressButton from "../ui/progress-button";
 import * as React from "react";
-import { MinusIcon, PlusIcon } from "@radix-ui/react-icons";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -13,7 +12,6 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
-import { DigitPicker } from "@/components/ui/digit-picker";
 import CaloriePicker from "../ui/calorie-picker";
 
 export default function Goal() {

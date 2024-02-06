@@ -1,13 +1,9 @@
-import { Button } from "../ui/button";
 import ProgressButton from "../ui/progress-button";
 import {
   Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
+  DialogContent, DialogTrigger
 } from "@/components/ui/dialog";
+
 
 export default function Planned() {
   return (
@@ -16,10 +12,12 @@ export default function Planned() {
         <DialogTrigger>
           <ProgressButton amount={0} label={"planned"} />
         </DialogTrigger>
-        <DialogContent asChild><Test /></DialogContent>
+        <VisuallyHidden>
+
+        </VisuallyHidden>
+        <DialogContent>
+        </DialogContent>
       </Dialog>
     </div>
   );
 }
-
-const Test = (props: Record<string, unknown>) => <div {...props}></div>;
