@@ -1,13 +1,18 @@
 import MealCard, { Meal } from "../primary/meal-card";
-import { Separator } from "./separator";
 import { CheckIcon } from "lucide-react";
 import { ScrollArea, ScrollBar } from "./scroll-area";
-import { useState } from "react";
+import { Dispatch } from "react";
 import { cn } from "@/lib/utils";
 
-export default function MealSelector({ meals }: { meals: Meal[] }) {
-  const [selected, setSelected] = useState<string[]>([]);
-
+export default function MealSelector({
+  meals,
+  selected,
+  setSelected,
+}: {
+  meals: Meal[];
+  selected: string[];
+  setSelected: Dispatch<string[]>;
+}) {
   function onSelect(mealProps: Meal) {
     const i = selected.indexOf(mealProps.name);
     const copy = Array.from(selected);

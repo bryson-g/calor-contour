@@ -1,20 +1,31 @@
-import { forwardRef, useState } from "react";
+import { Dispatch, useState } from "react";
 import { Button } from "../ui/button";
 import ProgressButton from "../ui/progress-button";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogFooter,
-  DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
 import MealSelector from "../ui/meal-selector";
-import { PlusCircle } from "lucide-react";
+import { PlusCircle, Trash2 } from "lucide-react";
+import { Meal } from "./meal-card";
 
-export default function Planned() {
+export default function Planned({
+  plannedMeals,
+  setPlannedMeals,
+}: {
+  plannedMeals: Meal[];
+  setPlannedMeals: Dispatch<Meal[]>;
+}) {
   const [selected, setSelected] = useState<string[]>([]);
+  const [prePlanned, setPrePlanned] = useState<Meal[]>(plannedMeals);
+
+  function removeSelected() {
+    setPrePlanned(prePlanned.filter((meal) => !selected.includes(meal.name)));
+    setSelected([]);
+  }
 
   return (
     <div>
@@ -26,8 +37,16 @@ export default function Planned() {
           <DialogTitle className="text-center font-bold text-xl m-5">
             planned for today
           </DialogTitle>
-          <div className="flex justify-end w-full">
-            <Button className="flex gap-2 rounded-full w-32 " variant="outline">
+          <div className="flex justify-end items-center w-full gap-4">
+            {selected.length > 0 && (
+              <Button
+                className="bg-red-500 rounded-full w-15 h-10 absolute start-7 gap-2"
+                onClick={() => removeSelected()}
+              >
+                <Trash2 /> remove
+              </Button>
+            )}
+            <Button className="flex gap-2 rounded-full w-32" variant="outline">
               <PlusCircle /> add meal
             </Button>
           </div>
@@ -35,67 +54,21 @@ export default function Planned() {
           <MealSelector
             selected={selected}
             setSelected={setSelected}
-            meals={[
-              {
-                name: "turkey sandwhich",
-                calories: 621,
-                ingredients: [
-                  "bread",
-                  "turkey",
-                  "cheese",
-                  "mustard",
-                  "hotsauce",
-                  "mayonaise",
-                ],
-              },
-              {
-                name: "protein shake",
-                calories: 830,
-                ingredients: [
-                  "protein powder",
-                  "peanut butter",
-                  "banana",
-                  "olive oil",
-                ],
-              },
-              {
-                name: "bagel",
-                calories: 320,
-                ingredients: ["bagel", "cream cheese"],
-              },
-              {
-                name: "turkey sandwhich",
-                calories: 621,
-                ingredients: [
-                  "bread",
-                  "turkey",
-                  "cheese",
-                  "mustard",
-                  "hotsauce",
-                  "mayonaise",
-                ],
-              },
-              {
-                name: "protein shake",
-                calories: 830,
-                ingredients: [
-                  "protein powder",
-                  "peanut butter",
-                  "banana",
-                  "olive oil",
-                ],
-              },
-              {
-                name: "bagel",
-                calories: 320,
-                ingredients: ["bagel", "cream cheese"],
-              },
-            ]}
+            meals={prePlanned}
           />
-          <DialogFooter className="mt-3 gap-3">
-            <Button variant="outline">Cancel</Button>
-            <Button>Submit</Button>
-            <Button className="bg-red-500">Remove Selected</Button>
+          <DialogFooter className="mt-3">
+            <div className="flex flex-col w-full gap-3">
+              <Button type="submit">Submit</Button>
+              <Button
+                variant="outline"
+                onClick={() => {
+                  setPlannedMeals(plannedMeals);
+                  setPrePlanned(plannedMeals);
+                }}
+              >
+                Cancel
+              </Button>
+            </div>
           </DialogFooter>
         </DialogContent>
       </Dialog>
