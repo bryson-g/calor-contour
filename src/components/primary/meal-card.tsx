@@ -17,7 +17,7 @@ export default function MealCard({
         <div className="font-semibold">{name}</div>
         <div className="text-[14px] font-light">{calories} calories</div>
       </div>
-      <div className="text-ellipsis">{ingredients.join(", ")}</div>
+      <div className="text-wrap">{ingredients.join(", ")}</div>
     </div>
   );
 }

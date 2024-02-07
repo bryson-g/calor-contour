@@ -1,26 +1,51 @@
-import { ScrollArea } from "@radix-ui/react-scroll-area";
 import MealCard, { Meal } from "../primary/meal-card";
 import { Separator } from "./separator";
 import { CheckIcon } from "lucide-react";
+import { ScrollArea, ScrollBar } from "./scroll-area";
+import { useState } from "react";
+import { cn } from "@/lib/utils";
 
 export default function MealSelector({ meals }: { meals: Meal[] }) {
+  const [selected, setSelected] = useState<string[]>([]);
+
+  function onSelect(mealProps: Meal) {
+    const i = selected.indexOf(mealProps.name);
+    const copy = Array.from(selected);
+
+    if (i !== -1) {
+      copy.splice(i, 1);
+      setSelected(copy);
+    } else {
+      setSelected([...copy, mealProps.name]);
+    }
+  }
+
   return (
-    <div>
-      <ScrollArea>
+    <ScrollArea className="h-72 whitespace-nowrap rounded-md border">
+      <div>
         {meals.map((mealProps, i) => {
           return (
-            <div>
-              <div className="flex flex-row items-center gap-3">
-                <div className="border rounded-md w-[20px] h-[20px] flex justify-center items-center">
-                    <CheckIcon className="w-5/6 h-5/6"/>
-                </div>
-                <MealCard {...mealProps} />
+            <button
+              className={cn("border flex p-3 w-full text-left", {
+                "bg-blue-100/80": selected.includes(mealProps.name),
+              })}
+              onClick={() => onSelect(mealProps)}
+            >
+              <div
+                className={
+                  "mt-5 border-2 rounded-md w-6 h-6 flex justify-center items-center"
+                }
+              >
+                {selected.includes(mealProps.name) && (
+                  <CheckIcon className="w-5/6 h-5/6" />
+                )}
               </div>
-              {i != meals.length - 1 && <Separator />}
-            </div>
+              <MealCard {...mealProps} />
+            </button>
           );
         })}
-      </ScrollArea>
-    </div>
+      </div>
+      <ScrollBar orientation="vertical" />
+    </ScrollArea>
   );
 }

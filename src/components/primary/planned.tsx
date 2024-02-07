@@ -1,20 +1,21 @@
-import { forwardRef } from "react";
+import { forwardRef, useState } from "react";
 import { Button } from "../ui/button";
 import ProgressButton from "../ui/progress-button";
 import {
   Dialog,
   DialogContent,
   DialogDescription,
+  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Separator } from "@/components/ui/separator";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import MealCard from "./meal-card";
 import MealSelector from "../ui/meal-selector";
+import { PlusCircle } from "lucide-react";
 
 export default function Planned() {
+  const [selected, setSelected] = useState<string[]>([]);
+
   return (
     <div>
       <Dialog>
@@ -22,9 +23,18 @@ export default function Planned() {
           <ProgressButton amount={0} label={"planned"} />
         </DialogTrigger>
         <DialogContent>
-          <DialogTitle className="text-center">planned</DialogTitle>
-          <DialogHeader>edit your meals</DialogHeader>
+          <DialogTitle className="text-center font-bold text-xl m-5">
+            planned for today
+          </DialogTitle>
+          <div className="flex justify-end w-full">
+            <Button className="flex gap-2 rounded-full w-32 " variant="outline">
+              <PlusCircle /> add meal
+            </Button>
+          </div>
+
           <MealSelector
+            selected={selected}
+            setSelected={setSelected}
             meals={[
               {
                 name: "turkey sandwhich",
@@ -82,7 +92,11 @@ export default function Planned() {
               },
             ]}
           />
-          {/* <DialogHeader>edit your meals</DialogHeader> */}
+          <DialogFooter className="mt-3 gap-3">
+            <Button variant="outline">Cancel</Button>
+            <Button>Submit</Button>
+            <Button className="bg-red-500">Remove Selected</Button>
+          </DialogFooter>
         </DialogContent>
       </Dialog>
     </div>
