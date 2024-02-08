@@ -1,15 +1,19 @@
 import { MinusIcon, PlusIcon } from "lucide-react";
 import { Button } from "./button";
+import { Dispatch } from "react";
 
 export function DigitPicker({
   digit,
   setDigit,
+  onChange,
 }: {
   digit: number;
-  setDigit: React.Dispatch<React.SetStateAction<number>>;
+  setDigit: Dispatch<React.SetStateAction<number>>;
+  onChange: () => void;
 }) {
   function onClick(increment: number) {
     setDigit(digit + increment);
+    onChange();
   }
 
   return (

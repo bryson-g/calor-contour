@@ -1,36 +1,46 @@
-import { SetStateAction } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { DigitPicker } from "./digit-picker";
 
-export default function CaloriePicker(props: CaloriePickerProps) {
-  const {
-    setThousandsDigit,
-    setHundredsDigit,
-    setTensDigit,
-    setOnesDigit,
+export default function CaloriePicker({
+  calories,
+  setCalories,
+}: {
+  calories: number;
+  setCalories: Dispatch<number>;
+}) {
+  const [thousandsDigit, setThousandsDigit] = useState<number>(0);
+  const [hundredsDigit, setHundredsDigit] = useState<number>(0);
+  const [tensDigit, setTensDigit] = useState<number>(0);
+  const [onesDigit, setOnesDigit] = useState<number>(0);
 
-    thousandsDigit,
-    hundredsDigit,
-    tensDigit,
-    onesDigit,
-  } = props;
+  function onDigitChange() {
+    setCalories(
+      thousandsDigit * 1000 + hundredsDigit * 100 + tensDigit * 10 + onesDigit
+    );
+  }
+
   return (
     <div className="flex justify-center">
-      <DigitPicker digit={thousandsDigit} setDigit={setThousandsDigit} />
-      <DigitPicker digit={hundredsDigit} setDigit={setHundredsDigit} />
-      <DigitPicker digit={tensDigit} setDigit={setTensDigit} />
-      <DigitPicker digit={onesDigit} setDigit={setOnesDigit} />
+      <DigitPicker
+        onChange={onDigitChange}
+        digit={thousandsDigit}
+        setDigit={setThousandsDigit}
+      />
+      <DigitPicker
+        onChange={onDigitChange}
+        digit={hundredsDigit}
+        setDigit={setHundredsDigit}
+      />
+      <DigitPicker
+        onChange={onDigitChange}
+        digit={tensDigit}
+        setDigit={setTensDigit}
+      />
+      <DigitPicker
+        onChange={onDigitChange}
+        digit={onesDigit}
+        setDigit={setOnesDigit}
+      />
     </div>
   );
 }
-
-type CaloriePickerProps = {
-  setThousandsDigit: React.Dispatch<SetStateAction<number>>;
-  setHundredsDigit: React.Dispatch<SetStateAction<number>>;
-  setTensDigit: React.Dispatch<SetStateAction<number>>;
-  setOnesDigit: React.Dispatch<SetStateAction<number>>;
-
-  thousandsDigit: number;
-  hundredsDigit: number;
-  tensDigit: number;
-  onesDigit: number;
-};

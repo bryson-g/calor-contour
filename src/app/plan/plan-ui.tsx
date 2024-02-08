@@ -1,21 +1,11 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import CaloriePicker from "@/components/ui/calorie-picker";
-import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger,
-} from "@/components/ui/drawer";
 import { Meal } from "@/components/ui/meal-card";
 import MealSelector from "@/components/ui/meal-selector";
 import { PlusCircle, Trash2 } from "lucide-react";
 import { useState } from "react";
+import CreateMeal from "./create-meal";
 
 export default function PlanUI({ meals }: { meals: Meal[] }) {
   const [selected, setSelected] = useState<string[]>([]);
@@ -54,48 +44,5 @@ export default function PlanUI({ meals }: { meals: Meal[] }) {
         <Button variant="outline">cancel</Button>
       </div>
     </div>
-  );
-}
-
-function CreateMeal() {
-  const [thousandsDigit, setThousandsDigit] = useState<number>(0);
-  const [hundredsDigit, setHundredsDigit] = useState<number>(0);
-  const [tensDigit, setTensDigit] = useState<number>(0);
-  const [onesDigit, setOnesDigit] = useState<number>(0);
-
-  return (
-    <Drawer>
-      <DrawerTrigger asChild>
-        <Button className="flex gap-2 rounded-full" variant="outline">
-          <PlusCircle /> create
-        </Button>
-      </DrawerTrigger>
-      <DrawerContent>
-        <div className="mx-auto w-full max-w-sm">
-          <DrawerHeader>
-            <DrawerTitle>create meal</DrawerTitle>
-            <DrawerDescription>
-              set name, calories, and ingredients of your meal
-            </DrawerDescription>
-          </DrawerHeader>
-          <CaloriePicker
-            setThousandsDigit={setThousandsDigit}
-            setHundredsDigit={setHundredsDigit}
-            setTensDigit={setTensDigit}
-            setOnesDigit={setOnesDigit}
-            thousandsDigit={thousandsDigit}
-            hundredsDigit={hundredsDigit}
-            tensDigit={tensDigit}
-            onesDigit={onesDigit}
-          />
-          <DrawerFooter className="mt-5">
-            <Button>Submit</Button>
-            <DrawerClose asChild>
-              <Button variant="outline">Cancel</Button>
-            </DrawerClose>
-          </DrawerFooter>
-        </div>
-      </DrawerContent>
-    </Drawer>
   );
 }
