@@ -11,10 +11,7 @@ export default async function Home() {
 
       <PlanUI meals={meals} />
 
-      <div className="flex flex-col w-full gap-3">
-        <Button type="submit">Submit</Button>
-        <Button variant="outline">Cancel</Button>
-      </div>
+
     </div>
   );
 }
