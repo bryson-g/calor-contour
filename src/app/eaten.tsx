@@ -1,4 +1,4 @@
-import ProgressButton from "../ui/progress-button";
+import ProgressButton from "../components/ui/progress-button";
 
 export default function Eaten() {
   return <div>

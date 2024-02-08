@@ -1,18 +1,22 @@
-import MealCard, { Meal } from "../primary/meal-card";
+"use client";
+
+import MealCard, { Meal } from "./meal-card";
 import { CheckIcon } from "lucide-react";
 import { ScrollArea, ScrollBar } from "./scroll-area";
-import { Dispatch } from "react";
+import { Dispatch, useState } from "react";
 import { cn } from "@/lib/utils";
 
 export default function MealSelector({
   meals,
   selected,
-  setSelected,
+  setSelected
 }: {
   meals: Meal[];
   selected: string[];
-  setSelected: Dispatch<string[]>;
+  setSelected: Dispatch<string[]>
 }) {
+  const [planned, setPlanned] = useState<Meal[]>([]);
+
   function onSelect(mealProps: Meal) {
     const i = selected.indexOf(mealProps.name);
     const copy = Array.from(selected);
@@ -26,7 +30,7 @@ export default function MealSelector({
   }
 
   return (
-    <ScrollArea className="h-72 whitespace-nowrap rounded-md border">
+    <ScrollArea className="h-full w-full whitespace-nowrap rounded-md border">
       <div>
         {meals.map((mealProps, i) => {
           return (
@@ -35,6 +39,7 @@ export default function MealSelector({
                 "bg-blue-100/80": selected.includes(mealProps.name),
               })}
               onClick={() => onSelect(mealProps)}
+              key={i}
             >
               <div
                 className={

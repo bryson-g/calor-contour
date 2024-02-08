@@ -1,4 +1,4 @@
-import ProgressButton from "../ui/progress-button";
+import ProgressButton from "../components/ui/progress-button";
 import * as React from "react";
 
 import { Button } from "@/components/ui/button";
@@ -12,7 +12,7 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
-import CaloriePicker from "../ui/calorie-picker";
+import CaloriePicker from "../components/ui/calorie-picker";
 
 export default function Goal() {
   const [goal, setGoal] = React.useState(350);
