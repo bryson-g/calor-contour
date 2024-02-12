@@ -11,22 +11,18 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { CheckSquare2Icon, PlusCircle, SquareIcon } from "lucide-react";
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
-export default function CreateMeal() {
+export default function CreateMeal({ children }: { children: ReactNode }) {
   const [calories, setCalories] = useState<number>(0);
   const [addToPlan, setAddToPlan] = useState<boolean>(true);
 
   return (
     <Drawer>
-      <DrawerTrigger asChild>
-        <Button className="flex gap-2 rounded-full" variant="outline">
-          <PlusCircle /> create
-        </Button>
-      </DrawerTrigger>
-      <DrawerContent>
-        <div className="mx-auto w-[90%] flex flex-col gap-3">
+      <DrawerTrigger asChild>{children}</DrawerTrigger>
+      <DrawerContent className="items-center">
+        <div className="max-w-[500px] w-[90%] flex flex-col gap-3">
           <div>
             <Label htmlFor="mealName"> meal name </Label>
             <Input placeholder="ex. turkey sandwich" id="mealName" />
@@ -51,7 +47,7 @@ export default function CreateMeal() {
                 size="sm"
               >
                 {addToPlan ? <CheckSquare2Icon /> : <SquareIcon />}
-                add to plan after creation
+                add to today's plan after creation
               </Button>
             </RadioGroup>
 

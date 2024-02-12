@@ -6,13 +6,15 @@ import MealSelector from "@/components/ui/meal-selector";
 import { PlusCircle, Trash2 } from "lucide-react";
 import { useState } from "react";
 import CreateMeal from "./create-meal";
+import AddMeal from "./add-meal";
 
 export default function PlanUI({ meals }: { meals: Meal[] }) {
-  const [selected, setSelected] = useState<string[]>([]);
-  const [draft, setDraft] = useState<Meal[]>(meals);
+  const [selected, setSelected] = useState<Meal[]>([]);
+  const [draftMeals, setDraftMeals] = useState<Meal[]>(meals);
+  const [allMeals, setAllMeals] = useState<Meal[]>(meals);
 
   function removeSelected() {
-    setDraft(draft.filter((meal) => !selected.includes(meal.name)));
+    setDraftMeals(draftMeals.filter((meal) => !selected.includes(meal)));
     setSelected([]);
   }
 
@@ -27,14 +29,20 @@ export default function PlanUI({ meals }: { meals: Meal[] }) {
             <Trash2 />
           </Button>
         )}
-        <Button className="flex gap-2 rounded-full" variant="outline">
-          <PlusCircle /> add
-        </Button>
-        <CreateMeal />
+        <CreateMeal>
+          <Button className="flex gap-2 rounded-full" variant="outline">
+            <PlusCircle /> create
+          </Button>
+        </CreateMeal>
+        <AddMeal allMeals={allMeals} draftMeals={draftMeals} setDraftMeals={setDraftMeals} > 
+          <Button className="flex gap-2 rounded-full" variant="outline">
+            <PlusCircle /> add
+          </Button>
+        </AddMeal>
       </div>
       <div className="h-[50vh] w-full">
         <MealSelector
-          meals={draft}
+          meals={draftMeals}
           selected={selected}
           setSelected={setSelected}
         />

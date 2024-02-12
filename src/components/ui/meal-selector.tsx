@@ -9,36 +9,37 @@ import { cn } from "@/lib/utils";
 export default function MealSelector({
   meals,
   selected,
-  setSelected
+  setSelected,
 }: {
   meals: Meal[];
-  selected: string[];
-  setSelected: Dispatch<string[]>
+  selected: Meal[];
+  setSelected: Dispatch<Meal[]>;
 }) {
   const [planned, setPlanned] = useState<Meal[]>([]);
 
-  function onSelect(mealProps: Meal) {
-    const i = selected.indexOf(mealProps.name);
+
+  function onSelect(clickedMeal: Meal) {
+    const i = selected.findIndex((meal) => meal.name == clickedMeal.name);
     const copy = Array.from(selected);
 
-    if (i !== -1) {
-      copy.splice(i, 1);
+    if (i != -1) {
+      copy.splice(i as number, 1);
       setSelected(copy);
     } else {
-      setSelected([...copy, mealProps.name]);
+      setSelected([...copy, clickedMeal]);
     }
   }
 
   return (
     <ScrollArea className="h-full w-full whitespace-nowrap rounded-md border">
       <div>
-        {meals.map((mealProps, i) => {
+        {meals.map((meal, i) => {
           return (
             <button
               className={cn("border flex p-3 w-full text-left", {
-                "bg-blue-100/80": selected.includes(mealProps.name),
+                "bg-blue-100/80": selected.includes(meal),
               })}
-              onClick={() => onSelect(mealProps)}
+              onClick={() => onSelect(meal)}
               key={i}
             >
               <div
@@ -46,11 +47,11 @@ export default function MealSelector({
                   "mt-5 border-2 rounded-md w-6 h-6 flex justify-center items-center"
                 }
               >
-                {selected.includes(mealProps.name) && (
+                {selected.includes(meal) && (
                   <CheckIcon className="w-5/6 h-5/6" />
                 )}
               </div>
-              <MealCard {...mealProps} />
+              <MealCard {...meal} />
             </button>
           );
         })}
