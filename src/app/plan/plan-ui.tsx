@@ -40,7 +40,7 @@ export default function PlanUI({ meals }: { meals: Meal[] }) {
         />
       </div>
       <div className="flex flex-col w-full gap-3 mt-8 ">
-        <Button type="submit">submit</Button>
+        <Button type="submit">confirm</Button>
         <Button variant="outline">cancel</Button>
       </div>
     </div>
