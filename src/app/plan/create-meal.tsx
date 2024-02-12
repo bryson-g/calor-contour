@@ -11,15 +11,36 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { CheckSquare2Icon, PlusCircle, SquareIcon } from "lucide-react";
-import { ReactNode, useState } from "react";
+import { Dispatch, ReactNode, useState } from "react";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Meal } from "@/components/ui/meal-card";
 
-export default function CreateMeal({ children }: { children: ReactNode }) {
+export default function CreateMeal({
+  children,
+  draftMeals,
+  setDraftMeals,
+}: {
+  children: ReactNode;
+  draftMeals: Meal[];
+  setDraftMeals: Dispatch<Meal[]>;
+}) {
   const [calories, setCalories] = useState<number>(0);
   const [addToPlan, setAddToPlan] = useState<boolean>(true);
 
+  function onSubmit() {
+    setDraftMeals([
+      ...draftMeals,
+      {
+        // todo : implement functionality
+        name: ,
+        calories: 13,
+        ingredients: [""],
+      },
+    ]);
+  }
+
   return (
-    <Drawer>
+    <Drawer onOpenChange={(open) => setAddToPlan(open)}>
       <DrawerTrigger asChild>{children}</DrawerTrigger>
       <DrawerContent className="items-center">
         <div className="max-w-[500px] w-[90%] flex flex-col gap-3">
@@ -47,11 +68,13 @@ export default function CreateMeal({ children }: { children: ReactNode }) {
                 size="sm"
               >
                 {addToPlan ? <CheckSquare2Icon /> : <SquareIcon />}
-                add to today's plan after creation
+                add to today's plan
               </Button>
             </RadioGroup>
 
-            <Button>create meal</Button>
+            <DrawerClose asChild>
+              <Button onClick={onSubmit}>create meal</Button>
+            </DrawerClose>
             <DrawerClose asChild>
               <Button variant="outline">cancel</Button>
             </DrawerClose>

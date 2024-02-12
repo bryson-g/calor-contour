@@ -29,12 +29,16 @@ export default function PlanUI({ meals }: { meals: Meal[] }) {
             <Trash2 />
           </Button>
         )}
-        <CreateMeal>
+        <CreateMeal draftMeals={draftMeals} setDraftMeals={setDraftMeals}>
           <Button className="flex gap-2 rounded-full" variant="outline">
             <PlusCircle /> create
           </Button>
         </CreateMeal>
-        <AddMeal allMeals={allMeals} draftMeals={draftMeals} setDraftMeals={setDraftMeals} > 
+        <AddMeal
+          allMeals={allMeals}
+          draftMeals={draftMeals}
+          setDraftMeals={setDraftMeals}
+        >
           <Button className="flex gap-2 rounded-full" variant="outline">
             <PlusCircle /> add
           </Button>
