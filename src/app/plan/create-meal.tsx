@@ -11,7 +11,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { CheckSquare2Icon, PlusCircle, SquareIcon } from "lucide-react";
-import { Dispatch, ReactNode, useState } from "react";
+import React, { Dispatch, ReactNode, useState } from "react";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Meal } from "@/components/ui/meal-card";
 
@@ -26,27 +26,36 @@ export default function CreateMeal({
 }) {
   const [calories, setCalories] = useState<number>(0);
   const [addToPlan, setAddToPlan] = useState<boolean>(true);
+  const [mealData, setMealData] = useState<Meal>({}); // make Meal all optional values
 
   function onSubmit() {
     setDraftMeals([
       ...draftMeals,
-      {
-        // todo : implement functionality
-        name: ,
-        calories: 13,
-        ingredients: [""],
-      },
+      mealData,
     ]);
+    setMealData(null);
+  }
+
+  function handleChange(event: any) {
+    setMealData({
+      ...mealData,
+      [event.target.id]: event.target.value,
+      calories: calories,
+    });
   }
 
   return (
     <Drawer onOpenChange={(open) => setAddToPlan(open)}>
       <DrawerTrigger asChild>{children}</DrawerTrigger>
       <DrawerContent className="items-center">
-        <div className="max-w-[500px] w-[90%] flex flex-col gap-3">
+        <form className="max-w-[500px] w-[90%] flex flex-col gap-3">
           <div>
-            <Label htmlFor="mealName"> meal name </Label>
-            <Input placeholder="ex. turkey sandwich" id="mealName" />
+            <Label htmlFor="name"> meal name </Label>
+            <Input
+              onChange={handleChange}
+              placeholder="ex. turkey sandwich"
+              id="name"
+            />
           </div>
 
           <div>
@@ -79,7 +88,7 @@ export default function CreateMeal({
               <Button variant="outline">cancel</Button>
             </DrawerClose>
           </DrawerFooter>
-        </div>
+        </form>
       </DrawerContent>
     </Drawer>
   );
