@@ -23,7 +23,7 @@ export default function MealCard({
 }
 
 export type Meal = {
-  name: string;
-  calories: number;
-  ingredients: string[];
+  name?: string;
+  calories?: number;
+  ingredients?: string[];
 };

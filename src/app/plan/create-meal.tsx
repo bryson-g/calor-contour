@@ -14,6 +14,7 @@ import { CheckSquare2Icon, PlusCircle, SquareIcon } from "lucide-react";
 import React, { Dispatch, ReactNode, useState } from "react";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Meal } from "@/components/ui/meal-card";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 
 export default function CreateMeal({
   children,
@@ -29,11 +30,10 @@ export default function CreateMeal({
   const [mealData, setMealData] = useState<Meal>({}); // make Meal all optional values
 
   function onSubmit() {
-    setDraftMeals([
-      ...draftMeals,
-      mealData,
-    ]);
-    setMealData(null);
+    if (mealData.name && mealData.ingredients && mealData.calories) {
+      setDraftMeals([...draftMeals, mealData]);
+      setMealData({});
+    }
   }
 
   function handleChange(event: any) {
@@ -64,8 +64,13 @@ export default function CreateMeal({
           </div>
 
           <Label> calories </Label>
-          <div className="border rounded-lg p-5">
-            <CaloriePicker calories={calories} setCalories={setCalories} />
+          <div className="border rounded-lg p-2">
+            <Dialog>
+              <DialogTrigger>{calories > 0 ? calories : "set calories"}</DialogTrigger>
+              <DialogContent>
+                <CaloriePicker calories={calories} setCalories={setCalories} />
+              </DialogContent>
+            </Dialog>
           </div>
 
           <DrawerFooter>
