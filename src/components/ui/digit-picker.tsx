@@ -1,19 +1,23 @@
 import { MinusIcon, PlusIcon } from "lucide-react";
 import { Button } from "./button";
-import { Dispatch } from "react";
+import { Dispatch, useState } from "react";
 
 export function DigitPicker({
-  digit,
-  setDigit,
-  onChange,
+  calories,
+  setCalories,
+  increment,
 }: {
-  digit: number;
-  setDigit: Dispatch<React.SetStateAction<number>>;
-  onChange: () => void;
+  calories: number;
+  setCalories: Dispatch<number>;
+  increment: number;
 }) {
-  function onClick(increment: number) {
-    setDigit(digit + increment);
-    onChange();
+  const digit = getDigit(increment);
+  function getDigit(position: number) {
+    return Math.floor(calories / position) % 10;
+  }
+
+  function onClick(direction: -1 | 1) {
+    setCalories(calories + increment * direction);
   }
 
   return (
@@ -23,7 +27,7 @@ export function DigitPicker({
         size="icon"
         className="h-14 w-14 shrink-0 rounded-full"
         onClick={() => onClick(1)}
-        disabled={digit >= 9}
+        disabled={digit>= 9}
       >
         <PlusIcon className="h-8 w-8" />
       </Button>
