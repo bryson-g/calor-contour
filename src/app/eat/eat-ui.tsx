@@ -27,7 +27,7 @@ export default function EatUI({ meals }: { meals: Meal[] }) {
           </Button>
         </PlanEat>
       </div>
-      <div className="h-[10%] w-full">
+      <div className="h-[40vh] w-full">
         <MealSelector
           meals={meals}
           selected={selected}

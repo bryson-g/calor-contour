@@ -1,7 +1,5 @@
 "use client";
 
-import { cn } from "@/lib/utils";
-
 export default function MealCard({ name, calories, ingredients }: Meal) {
   return (
     <div className="flex p-3 gap-3 w-full">
