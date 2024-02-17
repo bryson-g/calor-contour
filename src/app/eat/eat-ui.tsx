@@ -12,31 +12,31 @@ export default function EatUI({ meals }: { meals: Meal[] }) {
   const [selected, setSelected] = useState<Meal[]>([]);
 
   return (
-    <div className="w-full flex flex-col max-w-[500px] items-start gap-3">
-      <div className="flex justify-end gap-3 w-full">
-        <QuickEat>
+    <div className="w-full flex flex-col max-w-[500px] items-start">
+      <div className="flex justify-end gap-3 mb-3 w-full">
+        <QuickEat allMeals={meals}>
           <Button className="rounded-full" variant="outline">
             <SandwichIcon className="mr-2" />
             eat quick
           </Button>
         </QuickEat>
-        <PlanEat>
+        <PlanEat allMeals={meals}>
           <Button className="rounded-full" variant="outline">
             <CalendarIcon className="mr-2" />
             eat planned
           </Button>
         </PlanEat>
       </div>
-      <div className="h-[40vh] w-full">
+      <div className="h-[50vh] w-full">
         <MealSelector
           meals={meals}
           selected={selected}
           setSelected={setSelected}
         />
       </div>
-      <div className="flex flex-col gap-3 w-full">
-        <Button>submit</Button>
-        <Button>cancel</Button>
+      <div className="flex flex-col w-full gap-3 mt-8 ">
+        <Button type="submit">confirm</Button>
+        <Button variant="outline">cancel</Button>
       </div>
     </div>
   );

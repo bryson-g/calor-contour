@@ -6,7 +6,7 @@ export default async function Plan() {
 
   return (
     <div className="flex flex-col items-center gap-10 p-8 max-h-[300px]">
-      <h1 className="font-bold text-3xl sm:hidden">ate something?</h1>
+      <h1 className="font-bold text-3xl">ate something?</h1>
 
       <EatUI meals={meals} />
     </div>
