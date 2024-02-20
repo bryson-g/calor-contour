@@ -4,32 +4,40 @@ import { Button } from "@/components/ui/button";
 import { Meal } from "@/components/ui/meal-card";
 import MealSelector from "@/components/ui/meal-selector";
 import { useState } from "react";
-import QuickEat from "./quick-eat";
-import { SandwichIcon, CalendarIcon } from "lucide-react";
-import PlanEat from "./plan-eat";
+import QuickEat from "./add-calories";
+import { RefrigeratorIcon, SandwichIcon, CalendarIcon } from "lucide-react";
+import PlanEat from "./view-planned";
+import CreatedEat from "./view-created";
 
-export default function EatUI({ meals }: { meals: Meal[] }) {
+export default function EatUI({ createdMeals }: { createdMeals: Meal[] }) {
   const [selected, setSelected] = useState<Meal[]>([]);
+  const [eatenDraft, setEatenDraft] = useState<Meal[]>([]);
 
   return (
     <div className="w-full flex flex-col max-w-[500px] items-start">
       <div className="flex justify-end gap-3 mb-3 w-full">
-        <QuickEat allMeals={meals}>
+        <QuickEat allMeals={createdMeals}>
           <Button className="rounded-full" variant="outline">
             <SandwichIcon className="mr-2" />
-            eat quick
+            add calories
           </Button>
         </QuickEat>
-        <PlanEat allMeals={meals}>
+        <PlanEat allMeals={createdMeals}>
           <Button className="rounded-full" variant="outline">
             <CalendarIcon className="mr-2" />
-            eat planned
+            view plan
           </Button>
         </PlanEat>
+        <CreatedEat allMeals={createdMeals}>
+          <Button className="rounded-full" variant="outline">
+            <RefrigeratorIcon className="mr-2" />
+            view all
+          </Button>
+        </CreatedEat>
       </div>
       <div className="h-[50vh] w-full">
         <MealSelector
-          meals={meals}
+          meals={eatenDraft}
           selected={selected}
           setSelected={setSelected}
         />

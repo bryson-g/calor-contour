@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import CaloriePicker from "@/components/ui/calorie-picker";
+import { ContextNames, contexts } from "@/lib/context-util";
 import {
   Drawer,
   DrawerClose,
@@ -26,6 +27,8 @@ export default function CreateMeal({
   draftMeals: Meal[];
   setDraftMeals: Dispatch<Meal[]>;
 }) {
+  const CaloriePickerContext = contexts[ContextNames.CaloriePickerContext];
+
   const [calories, setCalories] = useState<number>(0);
   const [addToPlan, setAddToPlan] = useState<boolean>(true);
   const [mealData, setMealData] = useState<Meal>({}); // make Meal all optional values
@@ -39,8 +42,8 @@ export default function CreateMeal({
 
   function onSubmit() {
     if (mealData.name && mealData.ingredients && calories > 0) {
-      setDraftMeals([...draftMeals, mealData]);
-      setMealData({ ...mealData, calories: 3 });
+      const meal = {...mealData, calories: calories}
+      setDraftMeals([...draftMeals, meal]);
       setOpen(false);
 
       // todo: server process
@@ -92,7 +95,9 @@ export default function CreateMeal({
                 {calories > 0 ? calories : "set calories"}
               </DialogTrigger>
               <DialogContent>
-                <CaloriePicker calories={calories} setCalories={setCalories} />
+                <CaloriePickerContext.Provider value={[calories, setCalories]}>
+                  <CaloriePicker />
+                </CaloriePickerContext.Provider>
               </DialogContent>
             </Dialog>
           </div>

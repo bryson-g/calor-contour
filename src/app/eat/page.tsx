@@ -5,10 +5,9 @@ export default async function Plan() {
   let meals = await getCreatedMeals();
 
   return (
-    <div className="flex flex-col items-center gap-10 p-8 max-h-[300px]">
-      <h1 className="font-bold text-3xl">ate something?</h1>
-
-      <EatUI meals={meals} />
+    <div className="w-screen h-screen p-5">
+      <h1 className="font-bold text-3xl">Ate something?</h1>
+      
     </div>
   );
 }
