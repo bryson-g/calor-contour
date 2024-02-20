@@ -4,10 +4,9 @@ import { Button } from "@/components/ui/button";
 import { Meal } from "@/components/ui/meal-card";
 import MealSelector from "@/components/ui/meal-selector";
 import { useState } from "react";
-import QuickEat from "./add-calories";
 import { RefrigeratorIcon, SandwichIcon, CalendarIcon } from "lucide-react";
-import PlanEat from "./view-planned";
-import CreatedEat from "./view-created";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+
 
 export default function EatUI({ createdMeals }: { createdMeals: Meal[] }) {
   const [selected, setSelected] = useState<Meal[]>([]);
@@ -16,24 +15,16 @@ export default function EatUI({ createdMeals }: { createdMeals: Meal[] }) {
   return (
     <div className="w-full flex flex-col max-w-[500px] items-start">
       <div className="flex justify-end gap-3 mb-3 w-full">
-        <QuickEat allMeals={createdMeals}>
-          <Button className="rounded-full" variant="outline">
-            <SandwichIcon className="mr-2" />
-            add calories
-          </Button>
-        </QuickEat>
-        <PlanEat allMeals={createdMeals}>
-          <Button className="rounded-full" variant="outline">
-            <CalendarIcon className="mr-2" />
-            view plan
-          </Button>
-        </PlanEat>
-        <CreatedEat allMeals={createdMeals}>
-          <Button className="rounded-full" variant="outline">
-            <RefrigeratorIcon className="mr-2" />
-            view all
-          </Button>
-        </CreatedEat>
+        <Tabs defaultValue="account" className="w-[400px]">
+          <TabsList>
+            <TabsTrigger value="account">Account</TabsTrigger>
+            <TabsTrigger value="password">Password</TabsTrigger>
+          </TabsList>
+          <TabsContent value="account">
+            Make changes to your account here.
+          </TabsContent>
+          <TabsContent value="password">Change your password here.</TabsContent>
+        </Tabs>
       </div>
       <div className="h-[50vh] w-full">
         <MealSelector
