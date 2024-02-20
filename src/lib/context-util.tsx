@@ -5,6 +5,7 @@ import type { Context } from "react";
 
 export enum ContextNames {
   CaloriePickerContext = "cpc",
+  DraftMealsContext = "dmc",
 }
 export const contexts: Record<string, Context<any>> = {};
 
@@ -20,3 +21,4 @@ export function applyContext(name: string) {
 }
 
 makeContext<[number, Dispatch<number>]>(ContextNames.CaloriePickerContext);
+makeContext<[number, Dispatch<number>]>(ContextNames.DraftMealsContext);

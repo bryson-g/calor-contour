@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import CaloriePicker from "@/components/ui/calorie-picker";
-import { ContextNames, contexts } from "@/lib/context-util";
+import { ContextNames, applyContext, contexts } from "@/lib/context-util";
 import {
   Drawer,
   DrawerClose,
@@ -18,15 +18,10 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Meal } from "@/components/ui/meal-card";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 
-export default function CreateMeal({
-  children,
-  draftMeals,
-  setDraftMeals,
-}: {
-  children: ReactNode;
-  draftMeals: Meal[];
-  setDraftMeals: Dispatch<Meal[]>;
-}) {
+export default function CreateMeal({ children }: { children: ReactNode }) {
+  const [draftMeals, setDraftMeals] = applyContext(
+    ContextNames.DraftMealsContext
+  );
   const CaloriePickerContext = contexts[ContextNames.CaloriePickerContext];
 
   const [calories, setCalories] = useState<number>(0);
@@ -42,7 +37,7 @@ export default function CreateMeal({
 
   function onSubmit() {
     if (mealData.name && mealData.ingredients && calories > 0) {
-      const meal = {...mealData, calories: calories}
+      const meal = { ...mealData, calories: calories };
       setDraftMeals([...draftMeals, meal]);
       setOpen(false);
 

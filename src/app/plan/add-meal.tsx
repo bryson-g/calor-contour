@@ -10,18 +10,18 @@ import {
 import { Dispatch, ReactNode, useState } from "react";
 import { Meal } from "@/components/ui/meal-card";
 import MealSelector from "@/components/ui/meal-selector";
+import { ContextNames, applyContext } from "@/lib/context-util";
 
 export default function AddMeal({
   children,
   allMeals,
-  draftMeals,
-  setDraftMeals,
 }: {
   children: ReactNode;
   allMeals: Meal[];
-  draftMeals: Meal[];
-  setDraftMeals: Dispatch<Meal[]>;
 }) {
+  const [draftMeals, setDraftMeals] = applyContext(
+    ContextNames.DraftMealsContext
+  );
   const [selected, setSelected] = useState<Meal[]>([]);
 
   function onSubmit() {
