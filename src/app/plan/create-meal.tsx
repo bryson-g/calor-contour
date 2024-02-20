@@ -41,7 +41,6 @@ export default function CreateMeal({ children }: { children: ReactNode }) {
       setDraftMeals([...draftMeals, meal]);
       setOpen(false);
 
-      // todo: server process
       console.log(mealData, calories);
 
       close();

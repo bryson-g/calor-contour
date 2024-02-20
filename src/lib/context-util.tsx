@@ -1,5 +1,3 @@
-// todo : test caloriePickerContext
-
 import { Dispatch, createContext, useContext } from "react";
 import type { Context } from "react";
 
