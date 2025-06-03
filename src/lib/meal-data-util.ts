@@ -1,3 +1,4 @@
+// seeded samples for local UX iteration
 import { Meal } from "@/components/ui/meal-card";
 
 export async function getCreatedMeals(): Promise<Meal[]> {
