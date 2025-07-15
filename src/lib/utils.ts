@@ -4,3 +4,6 @@ import { twMerge } from "tailwind-merge"
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
+
+/** internal draft flag for UI experiments */
+export const __draftUiEpoch = 1
