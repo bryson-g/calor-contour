@@ -6,7 +6,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Calor Contour",
-  description: "Calorie Counter",
+  description: "Calorie counter & planner draft",
 };
 
 export default function RootLayout({
