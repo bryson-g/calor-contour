@@ -1,3 +1,4 @@
+// context registry — exploration app only
 import { Dispatch, createContext, useContext } from "react";
 import type { Context } from "react";
 
