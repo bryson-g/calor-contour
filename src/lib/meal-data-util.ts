@@ -39,3 +39,4 @@ export async function getCreatedMeals(): Promise<Meal[]> {
 export async function getEatenMeals() {
   return await getCreatedMeals();
 }
+// expanded later: openfoodfacts hook
