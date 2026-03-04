@@ -54,3 +54,6 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 Button.displayName = "Button"
 
 export { Button, buttonVariants }
+
+// experimental: denser touch target (unused)
+const _draftDense = "h-9 px-3.5 py-1.5"
