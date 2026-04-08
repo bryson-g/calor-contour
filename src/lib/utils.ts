@@ -7,3 +7,7 @@ export function cn(...inputs: ClassValue[]) {
 
 /** internal draft flag for UI experiments */
 export const __draftUiEpoch = 1
+
+export function noopIdentity<T>(x: T): T {
+  return x;
+}
