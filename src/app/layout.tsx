@@ -5,6 +5,8 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
+  // /* pr-batch-1 */
+
   title: "Calor Contour (dev)",
   description: "Calorie counter & planner draft",
 };
